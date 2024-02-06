@@ -1,13 +1,15 @@
 {
   "dependencies": {
-    "electron": "^28.2.1"
+    "electron": "^28.2.1",
+    "prettier": "^1.13.7"
   },
   "name": "duckti",
   "version": "1.0.0",
   "main": "main.js",
   "devDependencies": {},
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "prettier": "prettier --write \"**/*.{js,html}\""
   },
   "author": "",
   "license": "ISC",
