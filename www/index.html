@@ -1,0 +1,134 @@
+<head>
+    <title>Duckti</title>
+    <meta name="description" content="Duckti - Simple productivity tool for developers">
+    <meta name="keywords" content="Duckti, productivity, tool, developers">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,700">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
+    <style>
+        body {
+            font-family: 'Raleway', sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex; /* Make the body a flex container */
+        }
+    
+        #leftSidebar {
+            background-color: #999999;
+            color: #fff;
+            width: 30vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+    
+        #leftSidebar h1 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 2em;
+            margin-bottom: 1em;
+        }
+    
+        #leftSidebar nav ul {
+            list-style: none;
+            padding: 0;
+        }
+    
+        #leftSidebar nav ul li {
+            margin-bottom: 1em;
+        }
+    
+        #leftSidebar nav ul li button {
+            color: #fff;
+            text-decoration: none;
+            background-color: #ffffff00;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2em;
+        }
+    
+        #leftSidebar nav ul li button:hover {
+            color: #ffffff66;
+        }
+    
+        #rightContent {
+            background-color: #f4f4f4;
+            height: 100vh;
+            width: calc(100vw - 30vh); /* Adjusted width to accommodate the sidebar */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+    
+</head>
+<body>
+    <div id="leftSidebar">
+        <h1>Duckti</h1>
+        <nav>
+            <ul>
+                <li><button id="todo">To-Do</button></li>
+                <li><button id="projects">Projects</button></li>
+                <li><button id="pomodoro">Pomodoro</button></li>
+            </ul>
+        </nav>
+    </div>
+    <div id="rightContent">
+    </div>
+    <script>
+        document.getElementById('todo').addEventListener('click', function() {
+            document.getElementById('rightContent').innerHTML = 'To-Do content goes here';
+        });
+        document.getElementById('projects').addEventListener('click', function() {
+            document.getElementById('rightContent').innerHTML = 'Projects content goes here';
+        });
+        document.getElementById('pomodoro').addEventListener('click', function() {
+            document.getElementById('rightContent').innerHTML = '';
+            // Create progress bar
+            var progressBar = document.createElement('div');
+            progressBar.style.width = '70%';
+            progressBar.style.height = '1em';
+            progressBar.style.backgroundColor = '#11f';
+            progressBar.style.border = '1px solid #333';
+            progressBar.style.position = 'relative';
+            progressBar.style.overflow = 'hidden';
+            progressBar.style.marginBottom = '1em';
+            document.getElementById('rightContent').appendChild(progressBar);
+
+            // Create button under progress bar, when the button is clicked a timer for 25 minutes should start
+            // and this will be shown by a 🦆 moving atop the bar
+
+            var br = document.createElement('br');
+            document.getElementById('rightContent').appendChild(br);
+
+            var startButton = document.createElement('button'); 
+            startButton.innerHTML = 'Start Pomodoro';
+            startButton.style.padding = '1em';
+            startButton.style.border = 'none';
+            startButton.style.backgroundColor = '#33f';
+            startButton.style.color = '#fff';
+            startButton.style.cursor = 'pointer';
+            startButton.style.fontSize = '1.2em';
+            startButton.style.display = 'block';
+            document.getElementById('rightContent').appendChild(startButton);
+
+            startButton.addEventListener('click', function() {
+                var duck = document.createElement('span');
+                duck.innerHTML = '🦆';
+                duck.style.position = 'absolute';
+                duck.style.left = '0';
+                duck.style.color = '#ffffff00';
+                duck.style.animation = 'duck 1500ms forwards linear';
+                progressBar.appendChild(duck);
+            });
+
+            var style = document.createElement('style');
+            style.innerHTML = '@keyframes duck { 1% { left: 0%; color:#fff;}, 99% { left: 100%; color:#fff;}, 100% { left: 100%; color:#ffffff00} }';
+            document.head.appendChild(style);
+        });
+
+        document.getElementById('todo').click();
+    </script>
+</body>
